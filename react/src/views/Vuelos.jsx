@@ -5,17 +5,24 @@ import {Link} from "react-router-dom";
 
 export default function Vuelos() {
     const [users, setUsers] = useState(null);
+    const [vuelos, setVuelos] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        getUsers();
+    }, [])
 
     const getUsers = () => {
-        axiosClient.get("/vuelos")
-            .then(({data}) => {
-                setLoading(false);
-                console.log(data);
+        setLoading(true)
+        axiosClient.get('/users')
+            .then(({ data }) => {
+                console.log("entro")
+                setLoading(false)
+                setVuelos(data.data)
             })
             .catch(() => {
-                setLoading(false);
+                console.log("no entro")
+                setLoading(false)
             })
     }
 
@@ -23,7 +30,7 @@ export default function Vuelos() {
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h1>Vuelos</h1>
-                <Link to= "/vuelos/new" className="btn-add">Vuelos</Link>
+                <Link to= "/users/new" className="btn-add">Vuelos</Link>
             </div>
             <div className="card animated fadeInDown">
                 <table>
@@ -38,6 +45,19 @@ export default function Vuelos() {
                             <th>costo_vuelo</th>
                         </tr>
                     </thead>
+                    <body>
+                    {vuelos.map(u => (
+                        <tr key={u}>
+                            <td>{u.id}</td>
+                            <td>{u.hora_salida}</td>
+                            <td>{u.hora_llegada}</td>
+                            <td>{u.duracion_trayecto}</td>
+                            <td>{u.tipo_trayecto}</td>
+                            <td>{u.costo_vuelo}</td>
+                        </tr>
+
+                    ))}
+                    </body>
                 </table>
             </div>
         </div>

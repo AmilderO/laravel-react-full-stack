@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreVueloRequest;
+use App\Http\Requests\UpdateVueloRequest;
 use App\Http\Resources\VueloResource;
 use App\Models\Vuelo;
 use App\Http\Controllers\Controller;
@@ -22,7 +24,7 @@ class VueloController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreVueloRequest $request)
     {
         $data = $request->validated();
         $vuelo = Vuelo::create($data);
@@ -40,7 +42,7 @@ class VueloController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vuelo $vuelo)
+    public function update(UpdateVueloRequest $request, Vuelo $vuelo)
     {
         $data = $request->validated();
         $vuelo->update($data);

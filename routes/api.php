@@ -21,8 +21,7 @@ Route::middleware('auth:sanctum')->group(function() {
         return $request->user();
     });
     Route::post("/logout", [AuthController::class, "logout"]);
-    Route::apiResource("/vuelos", VueloController::class);
-});
+    Route::apiResource("/vuelos", VueloController::class);});
 
 
 Route::post("/signup", [AuthController::class, "signup"]);
