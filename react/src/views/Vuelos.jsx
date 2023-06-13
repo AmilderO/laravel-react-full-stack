@@ -14,7 +14,7 @@ export default function Vuelos() {
 
     const getUsers = () => {
         setLoading(true)
-        axiosClient.get('/users')
+        axiosClient.get('/vuelos')
             .then(({ data }) => {
                 console.log("entro")
                 setLoading(false)
